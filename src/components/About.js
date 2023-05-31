@@ -25,6 +25,10 @@ export default function About(props) {
               data-bs-target="#collapseOne"
               aria-expanded="true"
               aria-controls="collapseOne"
+              style={{
+                backgroundColor: props.mode === "light" ? "white" : "#22242af2",
+                color: props.mode === "dark" ? "white" : "#22242af2",
+              }}
             >
               Accordion Item #1
             </button>
@@ -61,6 +65,10 @@ export default function About(props) {
               data-bs-target="#collapseTwo"
               aria-expanded="false"
               aria-controls="collapseTwo"
+              style={{
+                backgroundColor: props.mode === "light" ? "white" : "#22242af2",
+                color: props.mode === "dark" ? "white" : "#22242af2",
+              }}
             >
               Accordion Item #2
             </button>
@@ -97,6 +105,10 @@ export default function About(props) {
               data-bs-target="#collapseThree"
               aria-expanded="false"
               aria-controls="collapseThree"
+              style={{
+                backgroundColor: props.mode === "light" ? "white" : "#22242af2",
+                color: props.mode === "dark" ? "white" : "#22242af2",
+              }}
             >
               Accordion Item #3
             </button>

@@ -1,4 +1,4 @@
-// import About from "./components/About";
+import About from "./components/About";
 import Alert from "./components/Alert";
 import Navbar from "./components/Navbar";
 import TextForm from "./components/TextForm";
@@ -69,6 +69,7 @@ function App() {
           heading="Enter the text to anaylze"
           mode={mode}
         />
+        <About mode={mode} />
         {/* </Routes> */}
       </div>
       {/* </Router> */}

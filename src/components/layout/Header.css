@@ -1,0 +1,132 @@
+/* ========================================
+   HEADER STYLES
+   Modern glassmorphism header
+   ======================================== */
+
+.header {
+  position: sticky;
+  top: 0;
+  z-index: var(--z-sticky);
+  background: var(--color-bg-elevated);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--color-border);
+  transition:
+    background-color var(--transition-base),
+    border-color var(--transition-base);
+}
+
+.header__container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: var(--space-4) var(--space-4);
+}
+
+@media (min-width: 768px) {
+  .header__container {
+    padding: var(--space-4) var(--space-6);
+  }
+}
+
+/* === Logo === */
+.header__logo {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  font-size: var(--text-xl);
+  font-weight: var(--font-bold);
+  color: var(--color-text-primary);
+  text-decoration: none;
+  transition: transform var(--transition-fast);
+}
+
+.header__logo:hover {
+  transform: scale(1.02);
+}
+
+.header__logo-icon {
+  font-size: var(--text-2xl);
+}
+
+.header__logo-text {
+  background: linear-gradient(
+    135deg,
+    var(--color-primary),
+    var(--color-primary-light)
+  );
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* === Navigation === */
+.header__nav {
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
+}
+
+/* === Theme Toggle === */
+.header__theme-toggle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  border-radius: var(--radius-full);
+  background: var(--color-bg-secondary);
+  color: var(--color-text-primary);
+  transition: all var(--transition-fast);
+}
+
+.header__theme-toggle:hover {
+  background: var(--color-bg-tertiary);
+  transform: rotate(15deg);
+}
+
+.header__theme-toggle:focus-visible {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 2px;
+}
+
+/* === Theme Icon Animation === */
+.theme-icon {
+  position: relative;
+  width: 20px;
+  height: 20px;
+}
+
+.theme-icon svg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  transition:
+    opacity var(--transition-base),
+    transform var(--transition-base);
+}
+
+.theme-icon svg.hidden {
+  opacity: 0;
+  transform: rotate(90deg) scale(0.5);
+}
+
+.theme-icon__sun:not(.hidden) {
+  animation: rotateIn 0.3s ease-out;
+}
+
+.theme-icon__moon:not(.hidden) {
+  animation: rotateIn 0.3s ease-out;
+}
+
+@keyframes rotateIn {
+  from {
+    opacity: 0;
+    transform: rotate(-90deg) scale(0.5);
+  }
+  to {
+    opacity: 1;
+    transform: rotate(0) scale(1);
+  }
+}

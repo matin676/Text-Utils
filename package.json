@@ -2,6 +2,7 @@
   "name": "text-utils",
   "version": "1.0.0",
   "description": "A powerful text manipulation tool for transforming and analyzing your text",
+  "type": "module",
   "private": true,
   "homepage": "https://matin676.github.io/Text-Utils",
   "author": "Matin Imam",
@@ -22,8 +23,10 @@
     "deploy": "gh-pages -d build"
   },
   "dependencies": {
+    "lucide-react": "^0.563.0",
     "react": "^19.2.3",
-    "react-dom": "^19.2.3"
+    "react-dom": "^19.2.3",
+    "react-markdown": "^10.1.0"
   },
   "devDependencies": {
     "@vitejs/plugin-react": "^5.1.2",

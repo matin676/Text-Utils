@@ -1,10 +1,26 @@
 # ✨ TextUtils
 
-A powerful, modern text manipulation tool built with React and Vite. Transform, analyze, and encode your text with a beautiful, responsive interface.
+A powerful, modern text manipulation tool built with React and Vite. Transform, analyze, and encode your text with a beautiful, responsive interface featuring the "Cosmic Developer" theme.
+
+![License](https://img.shields.io/badge/license-MIT-blue.svg) ![React](https://img.shields.io/badge/React-19-blue)
 
 ---
 
 ## ✅ Features
+
+### 🧠 Smart Text Operations
+
+_Context-aware sorting and deduplication that works on both lines and words._
+
+- **Smart Sort**: Automatically sorts lines (multi-line) or words (single-line).
+- **Smart Dedupe**: Removes duplicate lines or duplicate words based on context.
+
+### 🎨 Modern UI/UX
+
+- **"Cosmic Developer" Theme**: Professional dark mode with Slate & Neon Blue palette.
+- **Glassmorphism Header**: Distinctive frosted glass effect.
+- **Lucide Icons**: Crisp, industry-standard SVG icons.
+- **Responsive Layout**: Optimized for mobile and desktop.
 
 ### Text Transformations
 
@@ -16,6 +32,7 @@ A powerful, modern text manipulation tool built with React and Vite. Transform, 
 
 - Real-time match counting
 - Replace all occurrences
+- Case-sensitive matching
 
 ### Encode / Decode
 
@@ -27,13 +44,12 @@ A powerful, modern text manipulation tool built with React and Vite. Transform, 
 - 📋 Copy to clipboard
 - 💾 Download as .txt file
 - ↩️ Undo / ↪️ Redo (50 steps)
-- 🌙 Dark mode with system preference detection
+- 📊 JSON Formatter
 
 ### Text Statistics
 
-- Word count
-- Character count (with/without spaces)
-- Sentence count
+- Word count & Character count
+- Sentence & Paragraph count
 - Reading time estimate
 
 ---
@@ -42,8 +58,9 @@ A powerful, modern text manipulation tool built with React and Vite. Transform, 
 
 - **React 19** - UI framework
 - **Vite** - Build tool
-- **CSS Variables** - Theming system
-- **Context API** - State management
+- **Lucide React** - Icon library
+- **React Markdown** - Markdown preview
+- **CSS Variables** - Advanced theming
 
 ---
 
@@ -68,21 +85,6 @@ npm run dev
 ```bash
 # Build and deploy to GitHub Pages
 npm run deploy
-```
-
----
-
-## 📁 Project Structure
-
-```
-src/
-├── components/
-│   ├── common/          # Reusable UI (Button, Toast)
-│   ├── layout/          # Header
-│   └── features/        # TextEditor
-├── context/             # ThemeContext, ToastContext
-├── hooks/               # useTextUtils, useLocalStorage
-└── styles/              # CSS variables & animations
 ```
 
 ---

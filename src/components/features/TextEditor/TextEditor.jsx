@@ -13,6 +13,23 @@ import { useTextUtils } from "../../../hooks/useTextUtils";
 import { useToast } from "../../../context/ToastContext";
 import { Button } from "../../common/Button";
 import { TextStats } from "./TextStats";
+import ReactMarkdown from "react-markdown";
+import {
+  Undo,
+  Redo,
+  Search,
+  Download,
+  Copy,
+  Trash2,
+  FileJson,
+  ArrowUpDown,
+  ListX,
+  Eye,
+  Type,
+  AlignLeft,
+  ALargeSmall,
+  RotateCcw,
+} from "lucide-react";
 import "./TextEditor.css";
 
 export function TextEditor() {
@@ -23,6 +40,7 @@ export function TextEditor() {
   const [findText, setFindText] = useState("");
   const [replaceText, setReplaceText] = useState("");
   const [showFindReplace, setShowFindReplace] = useState(false);
+  const [isMarkdownMode, setIsMarkdownMode] = useState(false);
 
   // Wrap actions with toast notifications
   const handleAction = (action, message) => {
@@ -84,6 +102,11 @@ export function TextEditor() {
     toast.success("File downloaded!");
   };
 
+  const handleFormatJSON = () => {
+    const success = actions.formatJSON();
+    success ? toast.success("JSON Formatted") : toast.error("Invalid JSON");
+  };
+
   const handleUndo = () => {
     if (actions.undo()) {
       toast.info("Undo");
@@ -115,7 +138,7 @@ export function TextEditor() {
             disabled={!history.canUndo}
             title="Undo (Ctrl+Z)"
           >
-            ↩️ Undo
+            <Undo size={16} /> Undo
           </Button>
           <Button
             variant="ghost"
@@ -124,14 +147,14 @@ export function TextEditor() {
             disabled={!history.canRedo}
             title="Redo (Ctrl+Y)"
           >
-            ↪️ Redo
+            <Redo size={16} /> Redo
           </Button>
           <Button
             variant="ghost"
             size="sm"
             onClick={() => setShowFindReplace(!showFindReplace)}
           >
-            🔍 Find & Replace
+            <Search size={16} /> Find & Replace
           </Button>
           <Button
             variant="ghost"
@@ -139,7 +162,7 @@ export function TextEditor() {
             onClick={handleDownload}
             disabled={isEmpty}
           >
-            💾 Download
+            <Download size={16} /> Download
           </Button>
         </div>
 
@@ -195,7 +218,7 @@ export function TextEditor() {
               }
               disabled={isEmpty}
             >
-              UPPERCASE
+              <ALargeSmall size={16} /> UPPERCASE
             </Button>
             <Button
               onClick={() =>
@@ -203,7 +226,7 @@ export function TextEditor() {
               }
               disabled={isEmpty}
             >
-              lowercase
+              <ALargeSmall size={16} /> lowercase
             </Button>
             <Button
               onClick={() =>
@@ -211,7 +234,7 @@ export function TextEditor() {
               }
               disabled={isEmpty}
             >
-              Title Case
+              <Type size={16} /> Title Case
             </Button>
             <Button
               onClick={() =>
@@ -222,7 +245,7 @@ export function TextEditor() {
               }
               disabled={isEmpty}
             >
-              Sentence case
+              <AlignLeft size={16} /> Sentence case
             </Button>
           </div>
         </div>
@@ -238,24 +261,65 @@ export function TextEditor() {
               }
               disabled={isEmpty}
             >
-              Remove Spaces
+              <ListX size={16} /> Remove Spaces
             </Button>
             <Button
               variant="secondary"
               onClick={() => handleAction(actions.reverseText, "Text reversed")}
               disabled={isEmpty}
             >
-              Reverse
+              <RotateCcw size={16} /> Reverse
             </Button>
             <Button variant="ghost" onClick={handleCopy} disabled={isEmpty}>
-              📋 Copy
+              <Copy size={16} /> Copy
             </Button>
             <Button
               variant="danger"
               onClick={() => handleAction(actions.clearText, "Text cleared")}
               disabled={isEmpty}
             >
-              Clear
+              <Trash2 size={16} /> Clear
+            </Button>
+          </div>
+        </div>
+
+        {/* Advanced Tools */}
+        <div className="text-editor__section">
+          <h3 className="text-editor__section-label">Advanced Tools</h3>
+          <div className="text-editor__actions">
+            <Button
+              variant="secondary"
+              onClick={() =>
+                handleAction(actions.removeDuplicates, "Duplicates removed")
+              }
+              disabled={isEmpty}
+            >
+              <ListX size={16} /> Remove Duplicates
+            </Button>
+            <Button
+              variant="secondary"
+              onClick={() =>
+                handleAction(() => actions.sortLines("asc"), "Sorted A-Z")
+              }
+              disabled={isEmpty}
+            >
+              <ArrowUpDown size={16} /> Sort A-Z
+            </Button>
+            <Button
+              variant="secondary"
+              onClick={() =>
+                handleAction(() => actions.sortLines("desc"), "Sorted Z-A")
+              }
+              disabled={isEmpty}
+            >
+              <ArrowUpDown size={16} /> Sort Z-A
+            </Button>
+            <Button
+              variant="secondary"
+              onClick={handleFormatJSON}
+              disabled={isEmpty}
+            >
+              <FileJson size={16} /> Format JSON
             </Button>
           </div>
         </div>
@@ -300,12 +364,34 @@ export function TextEditor() {
 
         {/* Preview */}
         <div className="text-editor__preview">
-          <h2 className="text-editor__section-title">Preview</h2>
+          <div className="text-editor__preview-header">
+            <h2 className="text-editor__section-title">Preview</h2>
+            <Button
+              size="sm"
+              variant="ghost"
+              onClick={() => setIsMarkdownMode(!isMarkdownMode)}
+              disabled={isEmpty}
+            >
+              {isMarkdownMode ? (
+                <>
+                  <Type size={16} /> Show Raw Text
+                </>
+              ) : (
+                <>
+                  <Eye size={16} /> Markdown Preview
+                </>
+              )}
+            </Button>
+          </div>
           <div className="text-editor__preview-content">
             {isEmpty ? (
               <p className="text-editor__placeholder">
                 Your transformed text will appear here...
               </p>
+            ) : isMarkdownMode ? (
+              <div className="markdown-preview">
+                <ReactMarkdown>{text}</ReactMarkdown>
+              </div>
             ) : (
               <p>{text}</p>
             )}

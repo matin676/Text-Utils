@@ -3,6 +3,9 @@
    Reset, typography, and global defaults
    ======================================== */
 
+/* === Google Fonts Import === */
+@import url("https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Space+Grotesk:wght@400;500;600;700&display=swap");
+
 /* === Modern CSS Reset === */
 *,
 *::before,
@@ -39,9 +42,11 @@ h3,
 h4,
 h5,
 h6 {
-  font-weight: var(--font-semibold);
+  font-family: var(--font-heading);
+  font-weight: var(--font-bold);
   line-height: var(--leading-tight);
   color: var(--color-text-primary);
+  letter-spacing: -0.02em;
 }
 
 h1 {

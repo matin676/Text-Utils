@@ -17,7 +17,7 @@
 
 /* === Header === */
 .text-editor__header {
-  text-align: center;
+  text-align: left;
   margin-bottom: var(--space-8);
 }
 
@@ -68,8 +68,8 @@
   line-height: var(--leading-relaxed);
   color: var(--color-text-primary);
   background: var(--color-bg-secondary);
-  border: 2px solid var(--color-border);
-  border-radius: var(--radius-xl);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
   resize: vertical;
   transition: all var(--transition-fast);
 }
@@ -95,10 +95,10 @@
 
 /* === Actions === */
 .text-editor__actions {
-  display: flex;
-  flex-wrap: wrap;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
   gap: var(--space-3);
-  justify-content: center;
+  align-items: stretch;
 }
 
 /* === Section Titles === */

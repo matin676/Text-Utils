@@ -111,6 +111,57 @@ export function useTextUtils(initialText = "") {
     updateText("");
   }, [updateText]);
 
+  // === ADVANCED OPERATIONS ===
+  const removeDuplicates = useCallback(() => {
+    updateText((prev) => {
+      // If text has multiple lines, duplicate lines are removed
+      if (prev.includes("\n")) {
+        const lines = prev.split("\n");
+        const unique = [...new Set(lines)];
+        return unique.join("\n");
+      }
+      // If single line, duplicate words are removed
+      const words = prev.trim().split(/\s+/);
+      const unique = [...new Set(words)];
+      return unique.join(" ");
+    });
+  }, [updateText]);
+
+  const sortLines = useCallback(
+    (direction = "asc") => {
+      updateText((prev) => {
+        // If multitline, sort lines
+        if (prev.includes("\n")) {
+          const lines = prev.split("\n");
+          const sorted = lines.sort((a, b) => {
+            if (direction === "asc") return a.localeCompare(b);
+            return b.localeCompare(a);
+          });
+          return sorted.join("\n");
+        }
+        // If single line, sort words
+        const words = prev.trim().split(/\s+/);
+        const sorted = words.sort((a, b) => {
+          if (direction === "asc") return a.localeCompare(b);
+          return b.localeCompare(a);
+        });
+        return sorted.join(" ");
+      });
+    },
+    [updateText],
+  );
+
+  const formatJSON = useCallback(() => {
+    try {
+      const parsed = JSON.parse(text);
+      const formatted = JSON.stringify(parsed, null, 2);
+      updateText(formatted);
+      return true;
+    } catch (e) {
+      return false;
+    }
+  }, [text, updateText]);
+
   // === FIND & REPLACE ===
   const findAndReplace = useCallback(
     (find, replace, replaceAll = true) => {
@@ -246,6 +297,10 @@ export function useTextUtils(initialText = "") {
       reverseText,
       clearText,
       copyToClipboard,
+      // Advanced
+      removeDuplicates,
+      sortLines,
+      formatJSON,
       // Find & Replace
       findAndReplace,
       countOccurrences,
